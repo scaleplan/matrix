@@ -1,9 +1,9 @@
 {
-    "name": "scaleplan/synapse",
+    "name": "scaleplan/matrix",
     "description": "PHP SDK for Synapse server (https://matrix.org/docs/api/client-server)",
     "autoload": {
         "psr-4": {
-            "Scaleplan\\Synapse\\": "src/"
+            "Scaleplan\\Matrix\\": "src/"
         }
     },
     "require": {
