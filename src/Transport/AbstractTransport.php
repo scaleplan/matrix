@@ -19,6 +19,9 @@ use function Scaleplan\Helpers\get_required_env;
  */
 abstract class AbstractTransport
 {
+    /**
+     * @var string
+     */
     protected $apiUrl;
 
     /**
