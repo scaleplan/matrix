@@ -39,7 +39,7 @@ class UserRegisterDTO extends DTO
      * @Assert\Type(type="bool",groups={"type"})
      * @Assert\NotNull()
      */
-    protected $admin;
+    protected $isAdmin;
 
     /**
      * @var string
@@ -102,15 +102,15 @@ class UserRegisterDTO extends DTO
      */
     public function isAdmin()
     {
-        return $this->admin;
+        return $this->isAdmin;
     }
 
     /**
-     * @param bool $admin
+     * @param bool $isAdmin
      */
-    public function setAdmin($admin) : void
+    public function setIsAdmin($isAdmin) : void
     {
-        $this->admin = $admin;
+        $this->isAdmin = $isAdmin;
     }
 
     /**

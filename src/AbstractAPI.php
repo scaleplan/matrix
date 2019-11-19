@@ -19,7 +19,7 @@ abstract class AbstractAPI
     /**
      * AbstractAPI constructor.
      */
-    protected function __construct()
+    public function __construct()
     {
         $this->api = new ClientTransport();
     }

@@ -25,7 +25,14 @@ class RoomCreateDTO extends DTO
      * @var string
      *
      * @Assert\Type(type="string", groups={"type"})
-     * @Assert\NotBlank()
+     * @Assert\Length(min=3)
+     */
+    private $topic;
+
+    /**
+     * @var string
+     *
+     * @Assert\Type(type="string", groups={"type"})
      * @Assert\Length(min=4)
      * @Assert\Regex(pattern="/^#.+/")
      */
@@ -45,12 +52,12 @@ class RoomCreateDTO extends DTO
     private $invite;
 
     /**
-     * @var string
+     * @var bool
      *
-     * @Assert\Type(type="string", groups={"type"})
-     * @Assert\Choice(choices="\Scaleplan\Matrix\Constants\Visibility")
+     * @Assert\Type(type="bool", groups={"type"})
+     * @Assert\NotBlank()
      */
-    private $visibility;
+    private $isDirect;
 
     /**
      * @return string
@@ -71,6 +78,22 @@ class RoomCreateDTO extends DTO
     /**
      * @return string
      */
+    public function getTopic()
+    {
+        return $this->topic;
+    }
+
+    /**
+     * @param string $topic
+     */
+    public function setTopic($topic) : void
+    {
+        $this->topic = $topic;
+    }
+
+    /**
+     * @return string
+     */
     public function getRoomAliasName()
     {
         return $this->roomAliasName;
@@ -82,6 +105,22 @@ class RoomCreateDTO extends DTO
     public function setRoomAliasName($roomAliasName) : void
     {
         $this->roomAliasName = $roomAliasName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDirect()
+    {
+        return $this->isDirect;
+    }
+
+    /**
+     * @param bool $isDirect
+     */
+    public function setIsDirect($isDirect) : void
+    {
+        $this->isDirect = $isDirect;
     }
 
     /**
@@ -98,21 +137,5 @@ class RoomCreateDTO extends DTO
     public function setInvite($invite) : void
     {
         $this->invite = $invite;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVisibility()
-    {
-        return $this->visibility;
-    }
-
-    /**
-     * @param string $visibility
-     */
-    public function setVisibility($visibility) : void
-    {
-        $this->visibility = $visibility;
     }
 }

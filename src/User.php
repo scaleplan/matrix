@@ -82,7 +82,12 @@ class User extends AbstractAPI
      */
     public function setAvatar(UserAvatarDTO $dto) : RemoteResponseInterface
     {
-        return $this->api->put("/profile/{$dto->getUserId()}/avatar_url", ['avatar_url' => $dto->getAvatarUrl()]);
+        return $this->api->put(
+            "/profile/{$dto->getUserId()}/avatar_url",
+            ['avatar_url' => $dto->getAvatarUrl()],
+            null,
+            $dto->getAccessToken()
+        );
     }
 
     /**

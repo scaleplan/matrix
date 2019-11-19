@@ -3,6 +3,8 @@
 namespace Scaleplan\Matrix;
 
 use Scaleplan\Http\Interfaces\RemoteResponseInterface;
+use Scaleplan\Matrix\Constants\Preset;
+use Scaleplan\Matrix\Constants\Visibility;
 use Scaleplan\Matrix\DTO\Request\RoomCreateDTO;
 use Scaleplan\Matrix\DTO\Request\UserRoomDTO;
 use Scaleplan\Matrix\DTO\Response\RoomDTO;
@@ -32,13 +34,13 @@ class Room extends AbstractAPI
     public function create(RoomCreateDTO $dto) : RemoteResponseInterface
     {
         $data = array_merge(
-            $dto->toFullSnakeArray(),
+            $dto->toSnakeArray(),
             [
                 'creation_content' => [
                     'm.federate' => false,
                 ],
-                'preset'           => 'private_chat',
-                'is_direct'        => true,
+                'preset'           => $dto->getRoomAliasName() ? Preset::PUBLIC_CHAT : Preset::PRIVATE_CHAT,
+                'visibility' => $dto->getRoomAliasName() ? Visibility::PUBLIC : Visibility::PRIVATE,
             ]
         );
         return $this->api->post('/createRoom', $data, RoomDTO::class);
