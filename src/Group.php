@@ -7,6 +7,7 @@ use Scaleplan\Matrix\DTO\Request\GroupCreateDTO;
 use Scaleplan\Matrix\DTO\Request\GroupRemoveDTO;
 use Scaleplan\Matrix\DTO\Request\UserGroupDTO;
 use Scaleplan\Matrix\Transport\AdminTransport;
+use function Scaleplan\Helpers\get_required_env;
 
 /**
  * Class Group
@@ -21,13 +22,14 @@ class Group extends AbstractAPI
     private $adminApi;
 
     /**
-     * Account constructor.
-     * @throws \Scaleplan\Helpers\Exceptions\EnvNotFoundException
+     * Group constructor.
+     *
+     * @param string $serverName
      */
-    public function __construct()
+    public function __construct(string $serverName)
     {
-        parent::__construct();
-        $this->adminApi = new AdminTransport();
+        parent::__construct($serverName);
+        $this->adminApi = new AdminTransport($serverName);
     }
 
     /**
@@ -112,5 +114,17 @@ class Group extends AbstractAPI
     public function removeUser(UserGroupDTO $dto) : RemoteResponseInterface
     {
         return $this->api->put("/groups/{$dto->getGroupId()}/admin/users/remove/{$dto->getUserId()}");
+    }
+
+    /**
+     * @param string $groupName
+     *
+     * @return string
+     *
+     * @throws \Scaleplan\Helpers\Exceptions\EnvNotFoundException
+     */
+    public function getGroupId(string $groupName) : string
+    {
+        return "+$groupName:" . get_required_env('SYNAPSE_' . $this->api->getServerName() . '_ACCESS_TOKEN');
     }
 }

@@ -4,6 +4,7 @@ namespace Scaleplan\Matrix\DTO\Request;
 
 use Scaleplan\DTO\DTO;
 use Scaleplan\Matrix\Traits\DTO\NonceDTOTrait;
+use Scaleplan\Matrix\Traits\DTO\UsernameDTOTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,16 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserRegisterDTO extends DTO
 {
-    use NonceDTOTrait;
-
-    /**
-     * @var string
-     *
-     * @Assert\Type(type="string", groups={"type"})
-     * @Assert\NotBlank()
-     * @Assert\Length(min=3)
-     */
-    protected $username;
+    use NonceDTOTrait, UsernameDTOTrait;
 
     /**
      * @var string
@@ -63,22 +55,6 @@ class UserRegisterDTO extends DTO
     public function setNonce($nonce) : void
     {
         $this->nonce = $nonce;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param string $username
-     */
-    public function setUsername($username) : void
-    {
-        $this->username = $username;
     }
 
     /**

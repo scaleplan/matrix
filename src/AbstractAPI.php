@@ -18,9 +18,11 @@ abstract class AbstractAPI
 
     /**
      * AbstractAPI constructor.
+     *
+     * @param string $serverName
      */
-    public function __construct()
+    public function __construct(string $serverName)
     {
-        $this->api = new ClientTransport();
+        $this->api = new ClientTransport($serverName);
     }
 }
