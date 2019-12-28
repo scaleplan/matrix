@@ -46,7 +46,7 @@ abstract class AbstractTransport
 
     /**
      * @param string $url
-     * @param null $data
+     * @param array|DTO $data
      * @param string|null $dtoClass
      * @param string|null $accessToken
      *
